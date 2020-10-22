@@ -55,14 +55,18 @@ snailify = (grid) => {
   let result = []
   const n = grid.length
   if (n > 0) {
-    result.push(grid[0])
+    grid[0].forEach(number => {
+      result.push(number)
+    })
   }
   if (n > 1) {
     result.push(grid[1][n - 1])
   }
   if (n === 3) {
     const lastArrayReversed = grid[n - 1].reverse() // n - 1 = 2
-    result.push(lastArrayReversed)
+    lastArrayReversed.forEach(number => {
+      result.push(number)
+    })
     result.push(grid[1][0])
     result.push(grid[1][1])
   }
