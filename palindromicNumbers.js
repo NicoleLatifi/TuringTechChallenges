@@ -47,6 +47,23 @@
 // console.log(getPalindromicNumbers(numberToCheck))
 
 // Second iteration:
+// const result = [];
+// let numberToCheck = 0;
+//
+// getPalindromicNumbers = () => {
+//   do {
+//     sumToCheck = numberToCheck + parseInt(numberToCheck.toString().split('').reverse().join(''))
+//     if(sumToCheck > 1000) {
+//       result.push(numberToCheck)
+//     }
+//     numberToCheck++
+//   } while (result.length < 25)
+//   return result
+// }
+//
+// console.log(getPalindromicNumbers(numberToCheck))
+
+// Third iteration:
 const result = [];
 let numberToCheck = 0;
 
@@ -54,7 +71,11 @@ getPalindromicNumbers = () => {
   do {
     sumToCheck = numberToCheck + parseInt(numberToCheck.toString().split('').reverse().join(''))
     if(sumToCheck > 1000) {
-      result.push(numberToCheck)
+      const sumDigits = sumToCheck.toString().split('')
+      if(sumDigits[0] === sumDigits[sumDigits.length - 1]) {
+        console.log(sumToCheck)
+        result.push(numberToCheck)
+      }
     }
     numberToCheck++
   } while (result.length < 25)
