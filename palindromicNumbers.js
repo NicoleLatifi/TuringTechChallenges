@@ -64,6 +64,27 @@
 // console.log(getPalindromicNumbers(numberToCheck))
 
 // Third iteration:
+// const result = [];
+// let numberToCheck = 0;
+//
+// getPalindromicNumbers = () => {
+//   do {
+//     sumToCheck = numberToCheck + parseInt(numberToCheck.toString().split('').reverse().join(''))
+//     if(sumToCheck > 1000) {
+//       const sumDigits = sumToCheck.toString().split('')
+//       if(sumDigits[0] === sumDigits[sumDigits.length - 1]) {
+//         console.log(sumToCheck)
+//         result.push(numberToCheck)
+//       }
+//     }
+//     numberToCheck++
+//   } while (result.length < 25)
+//   return result
+// }
+//
+// console.log(getPalindromicNumbers(numberToCheck))
+
+// Fourth iteration:
 const result = [];
 let numberToCheck = 0;
 
@@ -71,9 +92,23 @@ getPalindromicNumbers = () => {
   do {
     sumToCheck = numberToCheck + parseInt(numberToCheck.toString().split('').reverse().join(''))
     if(sumToCheck > 1000) {
-      const sumDigits = sumToCheck.toString().split('')
-      if(sumDigits[0] === sumDigits[sumDigits.length - 1]) {
-        console.log(sumToCheck)
+      let passedCheck
+      const sumLength = ("" + sumToCheck).length
+      let pairsToCheck = Math.floor(sumLength/2)
+      let sumDigits = sumToCheck.toString().split('')
+      do {
+        if(sumDigits[0] === sumDigits[sumDigits.length - 1]) {
+          sumDigits.splice(0, 1)
+          const lastIndex = sumDigits.length - 1
+          sumDigits.splice(lastIndex, 1)
+          passedCheck = true
+          pairsToCheck--
+        } else {
+          passedCheck = false
+          pairsToCheck = 0
+        }
+      } while (pairsToCheck > 0)
+      if(passedCheck === true) {
         result.push(numberToCheck)
       }
     }
