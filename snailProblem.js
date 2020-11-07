@@ -51,26 +51,104 @@ const arrayMatrix = [
   [7, 8, 9]
 ];
 
+// snailify = (grid) => {
+//   let result = []
+//   const n = grid.length
+//   if (n > 0) {
+//     grid[0].forEach(number => {
+//       result.push(number)
+//     })
+//   }
+//   if (n > 1) {
+//     result.push(grid[1][n - 1])
+//   }
+//   if (n === 3) {
+//     const lastArrayReversed = grid[n - 1].reverse() // n - 1 = 2
+//     lastArrayReversed.forEach(number => {
+//       result.push(number)
+//     })
+//     result.push(grid[1][0])
+//     result.push(grid[1][1])
+//   }
+//   return result
+// }
+//
+// console.log(snailify(arrayMatrix))
+
 snailify = (grid) => {
-  let result = []
   const n = grid.length
-  if (n > 0) {
-    grid[0].forEach(number => {
-      result.push(number)
-    })
-  }
-  if (n > 1) {
-    result.push(grid[1][n - 1])
-  }
-  if (n === 3) {
-    const lastArrayReversed = grid[n - 1].reverse() // n - 1 = 2
-    lastArrayReversed.forEach(number => {
-      result.push(number)
-    })
-    result.push(grid[1][0])
-    result.push(grid[1][1])
-  }
-  return result
+  const gridShells = {}
+  const gridShellKeys = grid.splice(2).forEach((array, i) => {
+    gridShells[i] = []
+  })
+  // create an array for the keys, take the indices of grid and then splice out the top half
+
+  grid.forEach((array, i) => {
+    gridShells[i] = []
+  })
+
+
+  return gridShells
 }
 
 console.log(snailify(arrayMatrix))
+
+// do a commit once gridShells is completed
+
+// 5 x 5
+// {
+//   1: [
+//     [1, 2, 3, 4, 5],
+//     [6, null, null, null, 10],
+//     [11, null, null, null, 15],
+//     [16, null, null, null, 20],
+//     [21, 22, 23, 24, 25]
+//   ],
+//   2: [
+//     [7, 8, 9],
+//     [12, null, 14],
+//     [17, 18, 19]
+//   ],
+//   3: [
+//     13
+//   ]
+// }
+//
+// // 4 x 4
+// {
+//   1: [
+//     [1, 2, 3, 4],
+//     [5, null, null, 8],
+//     [9, null, null, 12]
+//     [13, 14, 15, 16]
+//   ],
+//   2: [
+//     [6, 7],
+//     [10, 11]
+//   ],
+// }
+//
+// // 3 x 3
+// {
+//   1: [
+//     [1, 2, 3],
+//     [4, null, 6],
+//     [7, 8, 9]
+//   ],
+//   2: [
+//     [5]
+//   ]
+// }
+//
+// // 2 x 2
+// {
+//   1: [
+//     [1,2],
+//     [3,4]
+//   ]
+// }
+//
+// // 1 x 1
+// {
+//   1: [1]
+// }
