@@ -39,29 +39,116 @@ const romanNumerals = {
   1: 'I'
 }
 
-function toRoman(num) {
-  let resultArray = [];
-  let numbers = num.toString().split('')
-  // let onesNumber = numbers[numbers.length - 1]
-  // let tensNumber = numbers[numbers.length - 2]
-  // let hundredsNumber = numbers[numbers.length - 3]
-  // let thousandsNumber = numbers[numbers.length - 4]
-  let amountOfNumbers = numbers.length - 1
-  let numberToAdd = numbers[amountOfNumbers]
-  numbers = numbers.splice(numbers.length[0], amountOfNumbers)
-  console.log(numberToAdd)
-  resultArray.push(romanNumerals[numberToAdd])
-  console.log(resultArray)
-  console.log(numbers)
+
+// break number up
+//  iterate through the object and if the number minus the roman numberal number equals a positive integer, add it to an array
+// concat together the roman numberal letters
+//  iterate through the numberArray
+
+// iteration 3: use broken up input number to concat the roman Numeral output
+let numberArray = []
+let result = ""
+let rNNumbers = Object.keys(romanNumerals)
+
+function toRoman(inputNum) {
+  breakUpNumber(inputNum, rNNumbers)
+  numberArray.forEach(number => {
+    result += romanNumerals[parseInt(number)]
+    console.log(result)
+  })
+  return result
 }
 
-console.log(toRoman(1));
-console.log(toRoman(128));  // should return "CXXVIII"
-console.log(toRoman(2000)); // should return "MM"
-console.log(toRoman(2017)); // should return "MMXVII"
-console.log(toRoman(1999)); // should return "MCMXCIX"
+function breakUpNumber(inputNum, rNNumbers) {
+  if (rNNumbers.length === 0) {
+    return ""
+  } else {
+    const remainingNum = inputNum - rNNumbers[rNNumbers.length - 1]
+    // if the remaining number is positive, push the roman numeral number into numberArray and call the function again with the remaining number
+    // if the remaining number is negative, call the function again with the original inputNum
+    if (remainingNum >= 0) {
+      numberArray.push(rNNumbers[rNNumbers.length - 1])
+      console.log(numberArray)
+      rNNumbers.pop()
+      return breakUpNumber(remainingNum, rNNumbers)
+    } else {
+      rNNumbers.pop()
+      return breakUpNumber(inputNum, rNNumbers)
+    }
+  }
+}
+
+// iteration 2: break up the input number into rommanNumeral numbers that add up to it
+// let numberArray = []
+// let result = ""
+// let rNNumbers = Object.keys(romanNumerals)
+//
+// function toRoman(inputNum) {
+//   breakUpNumber(inputNum, rNNumbers)
+//   return result
+// }
+//
+// function breakUpNumber(inputNum, rNNumbers) {
+//   if (rNNumbers.length === 0) {
+//     return ""
+//   } else {
+//     const remainingNum = inputNum - rNNumbers[rNNumbers.length - 1]
+//     // if the remaining number is positive, push the roman numeral number into numberArray and call the function again with the remaining number
+//     // if the remaining number is negative, call the function again with the original inputNum
+//     if (remainingNum >= 0) {
+//       numberArray.push(rNNumbers[rNNumbers.length - 1])
+//       console.log(numberArray)
+//       rNNumbers.pop()
+//       return breakUpNumber(remainingNum, rNNumbers)
+//     } else {
+//       rNNumbers.pop()
+//       return breakUpNumber(inputNum, rNNumbers)
+//     }
+//   }
+// }
+
+// iteration 1: find all romanNumeral numbers that are less than or equal to the input number
+// let numberArray = []
+// let result = ""
+// const rNNumbers = Object.keys(romanNumerals)
+// console.log(rNNumbers)
+//
+// function toRoman(inputNum) {
+//   for (let i = 12; i >= 0; i--) {
+//     const remainingNum = inputNum - rNNumbers[i]
+//     if (remainingNum >= 0 && Number.isInteger(remainingNum)) {
+//       numberArray.push(rNNumbers[i])
+//     }
+//     console.log(rNNumbers[i])
+//     console.log(numberArray)
+//   }
+// }
+
+
+console.log(toRoman(116));  // should return "CXVI" [100, 10, 5, 1,]
+// console.log(toRoman(128)) // should return "CXXVIII" [100, 10, 10, 5, 1, 1, 1]
+// console.log(toRoman(2000)); // should return "MM" [1000, 1000]
+// console.log(toRoman(2017)); // should return "MMXVII" [1000, 1000, 10, 5, 1, 1]
+// console.log(toRoman(1999)); // should return "MCMXCIX" [1000, 900, 90, ]
 // ```
 //
+// Can this be solved another way?
+// function toRoman(num) {
+//   let resultArray = [];
+//   let numbers = num.toString().split('')
+//   // let onesNumber = numbers[numbers.length - 1]
+//   // let tensNumber = numbers[numbers.length - 2]
+//   // let hundredsNumber = numbers[numbers.length - 3]
+//   // let thousandsNumber = numbers[numbers.length - 4]
+//   let amountOfNumbers = numbers.length - 1
+//   let numberToAdd = numbers[amountOfNumbers]
+//   numbers = numbers.splice(numbers.length[0], amountOfNumbers)
+//   console.log(numberToAdd)
+//   resultArray.push(romanNumerals[numberToAdd])
+//   console.log(resultArray)
+//   console.log(numbers)
+// }
+
 // ## Ruby Starter Code
 // ```rb
 // def to_roman(num)
